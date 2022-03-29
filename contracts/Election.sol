@@ -20,6 +20,12 @@ contract Election {
   mapping(address =>bool) public voters;
   //candidate count
   uint public candidatesCount;
+
+  event votedEvent(
+    uint indexed _candidateId
+    );
+
+  //Find a way to add candidates
   constructor () public {
     addCandidate("Candidate 1");
     addCandidate("Candidate 2");
@@ -40,5 +46,7 @@ contract Election {
     voters[msg.sender] = true;
     //update votes (Update with weighted votes based on held tokens)
     candidates[_candidateId].voteCount++;
+
+    emit votedEvent(_candidateId);
   }
 }
